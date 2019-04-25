@@ -28,3 +28,18 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 }
 
+// Adding this block of code causes gradle sync to fail inside of Android Studio
+tasks.whenTaskAdded { task ->
+    logger.println("Task: $task")
+}
+
+// With the following error:
+// ----------
+//  What went wrong:
+//  A problem was found with the configuration of task ':app:processDebugAndroidTestManifest'.
+//  > No value has been specified for property 'manifestOutputDirectory'.
+// -----------
+
+// To fix the failure go to `Preferences` -> `Experimental` -> uncheck `Only sync the active variant` -> Apply
+// Then the next gradle sync will succeed
+
